@@ -323,107 +323,120 @@
     </style>
 </head>
 <body>
-    <div class="registration-container">
-        <div class="registration-card">
-            <a href="<?= base_url('home') ?>" class="back">
-                <img src="<?= base_url('images/back.png') ?>" alt="Back">
-            </a>
+   <div class="registration-container">
+    <div class="registration-card">
+        <a href="<?= base_url('home') ?>" class="back">
+            <img src="<?= base_url('images/back.png') ?>" alt="Back">
+        </a>
 
-            <!-- Logo Display -->
-            <div class="logo-display">
-                <img src="<?= base_url('images/logo-polban4.png') ?>" alt="POLBAN Logo" class="logo-img">
-            </div>
+        <!-- Logo Display -->
+        <div class="logo-display">
+            <img src="<?= base_url('images/logo-polban4.png') ?>" alt="POLBAN Logo" class="logo-img">
+        </div>
 
-            <h1 class="form-title">Registerasi</h1>
-            <p class="form-note">Silahkan Lengkapi Form berikut ini<br>Catatan: * harus diisi. merah = salah / tidak lengkap</p>
+        <h1 class="form-title">Registrasi</h1>
+        <p class="form-note">Silahkan Lengkapi Form berikut ini<br>Catatan: * harus diisi. merah = salah / tidak lengkap</p>
+
+        <form action="<?= base_url('register/save') ?>" method="post">
 
             <!-- USER ID Section -->
             <div class="form-section">
-                <h2 class="section-title">USER ID</h2>
-                
+                <h2 class="section-title">User ID</h2>
+
                 <div class="form-group">
                     <label for="email" class="form-label required">E-mail</label>
-                    <input type="email" id="email" class="form-control" placeholder="Masukkan alamat email" required>
-                    <i class="fas fa-envelope input-icon"></i>
-                    <div class="error-message">Email tidak valid</div>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan alamat email" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password" class="form-label required">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Buat password" required>
-                    <i class="fas fa-lock input-icon"></i>
-                    <div class="error-message">Password minimal 8 karakter</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirmPassword" class="form-label required">Confirm Password</label>
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Konfirmasi password" required>
-                    <i class="fas fa-lock input-icon"></i>
-                    <div class="error-message">Password tidak cocok</div>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Buat password" required>
                 </div>
             </div>
 
-            <!-- General Section -->
+            <!-- GENERAL Section -->
             <div class="form-section">
                 <h2 class="section-title">General</h2>
-                
-                <table class="form-table">
-                    <tr>
-                        <td class="label-cell required">Name Lengkap</td>
-                        <td class="input-cell">
-                            <input type="text" class="form-control" placeholder="Nama lengkap">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-cell required">Alamat</td>
-                        <td class="input-cell">
-                            <input type="text" class="form-control" placeholder="Alamat">
-                            <div class="error-message">Alamat harus diisi</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-cell required">Kota</td>
-                        <td class="input-cell">
-                            <input type="text" class="form-control" placeholder="Kota">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-cell required">Negara</td>
-                        <td class="input-cell">
-                            <input type="text" class="form-control" placeholder="Negara">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-cell required">Institusi</td>
-                        <td class="input-cell">
-                            <input type="text" class="form-control" placeholder="Institusi">
-                        </td>
-                    </tr>
-                </table>
-                
+
                 <div class="form-group">
-                    <label class="form-label">Sekerjaan</label>
-                    <div class="checkbox-option">
-                        <input type="radio" id="student" name="occupation" checked>
-                        <label for="student">Student, Lower Level School ✓</label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="radio" id="other" name="occupation">
-                        <label for="other">Other</label>
-                    </div>
+                    <label for="nama" class="form-label required">Nama Lengkap</label>
+                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama lengkap" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role" class="form-label required">Role</label>
+                    <select name="role" id="role" class="form-control" required>
+                        <option value="">-- Pilih Role --</option>
+                        <option value="mahasiswa">Mahasiswa</option>
+                        <option value="dosen">Dosen</option>
+                    </select>
+                </div>
+
+                <div class="form-group mahasiswa-only">
+                    <label for="nim" class="form-label required">NIM (Mahasiswa)</label>
+                    <input type="text" name="nim" id="nim" class="form-control" placeholder="NIM Mahasiswa">
+                </div>
+
+                <div class="form-group dosen-only">
+                    <label for="nidk" class="form-label required">NIDK (Dosen)</label>
+                    <input type="text" name="nidk" id="nidk" class="form-control" placeholder="NIDK Dosen">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_jurusan" class="form-label required">Jurusan</label>
+                    <select name="id_jurusan" id="id_jurusan" class="form-control" required>
+                        <option value="">-- Pilih Jurusan --</option>
+                        <?php foreach ($jurusan as $j): ?>
+                            <option value="<?= $j['id_jurusan'] ?>"><?= $j['nama_jurusan'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_prodi" class="form-label required">Prodi</label>
+                    <select name="id_prodi" id="id_prodi" class="form-control" required>
+                        <option value="">-- Pilih Prodi --</option>
+                        <?php foreach ($prodi as $p): ?>
+                            <option value="<?= $p['id_prodi'] ?>"><?= $p['nama_prodi'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tanggal_lahir" class="form-label required">Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jenis_kelamin" class="form-label required">Jenis Kelamin</label>
+                    <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
+                        <option value="">-- Pilih Jenis Kelamin --</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="alamat" class="form-label required">Alamat</label>
+                    <textarea name="alamat" id="alamat" class="form-control" placeholder="Alamat lengkap" required></textarea>
+                </div>
+
+                <div class="form-group mahasiswa-only">
+                    <label for="tahun_masuk" class="form-label required">Tahun Masuk</label>
+                    <input type="number" name="tahun_masuk" id="tahun_masuk" class="form-control" placeholder="Contoh: 2023">
                 </div>
             </div>
 
-            <!-- Verification Section -->
+            <!-- BUTTONS -->
             <div class="form-section">
-                <h2 class="section-title">Verifikasi</h2>
                 <div class="button-group">
-                    <button type="button" class="form-btn submit">Submit</button>
+                    <button type="submit" class="form-btn submit">Submit</button>
                     <button type="reset" class="form-btn reset">Reset</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
