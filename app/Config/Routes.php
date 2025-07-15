@@ -5,7 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'HomeController::index');
+
 $routes->get('register', 'AuthController::register');
 $routes->post('register/save', 'AuthController::saveRegister');
 
@@ -16,6 +17,8 @@ $routes->get('logout', 'AuthController::logout');
 
 $routes->group('admin', function($routes) {
     // Jurusan
+    
+    $routes->get('dashboard', 'Admin\DashboardController::index');    
     $routes->get('jurusan', 'Admin\JurusanController::index');
     $routes->get('jurusan/create', 'Admin\JurusanController::create');
     $routes->post('jurusan/store', 'Admin\JurusanController::store');
