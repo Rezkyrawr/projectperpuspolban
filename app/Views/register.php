@@ -204,13 +204,19 @@
             width: 100%;
         }
 
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
-            color: white;
-            outline: none;
-        }
+       .form-control:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(245, 245, 245, 0.83);
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+/* ✅ Tambahkan ini khusus untuk isi dropdown */
+select.form-control option {
+    background-color: white; /* Warna latar dropdown */
+    color: black;            /* Warna teks di dropdown */
+}
 
         .form-control::placeholder {
             color: rgba(255, 255, 255, 0.6);
@@ -372,15 +378,16 @@
                     </select>
                 </div>
 
-                <div class="form-group mahasiswa-only">
-                    <label for="nim" class="form-label required">NIM (Mahasiswa)</label>
-                    <input type="text" name="nim" id="nim" class="form-control" placeholder="NIM Mahasiswa">
-                </div>
+                   <div class="form-group mahasiswa-only" style="display: none;">
+    <label for="nim" class="form-label required">NIM (Mahasiswa)</label>
+    <input type="text" name="nim" id="nim" class="form-control" placeholder="NIM Mahasiswa">
+</div>
+                <div class="form-group dosen-only" style="display: none;">
+    <label for="nidk" class="form-label required">NIDN (Dosen)</label>
+    <input type="text" name="nidk" id="nidk" class="form-control" placeholder="NIDK Dosen">
+</div>
 
-                <div class="form-group dosen-only">
-                    <label for="nidk" class="form-label required">NIDN (Dosen)</label>
-                    <input type="text" name="nidk" id="nidk" class="form-control" placeholder="NIDK Dosen">
-                </div>
+  
 
                 <div class="form-group">
                     <label for="id_jurusan" class="form-label required">Jurusan</label>
@@ -552,6 +559,33 @@
                 });
             });
         });
+
+         document.addEventListener('DOMContentLoaded', function () {
+        const roleSelect = document.getElementById('role');
+        const mahasiswaFields = document.querySelectorAll('.mahasiswa-only');
+        const dosenFields = document.querySelectorAll('.dosen-only');
+
+        function toggleFields() {
+            const selectedRole = roleSelect.value;
+
+            // Sembunyikan semua dulu
+            mahasiswaFields.forEach(field => field.style.display = 'none');
+            dosenFields.forEach(field => field.style.display = 'none');
+
+            // Tampilkan berdasarkan role
+            if (selectedRole === 'mahasiswa') {
+                mahasiswaFields.forEach(field => field.style.display = 'block');
+            } else if (selectedRole === 'dosen') {
+                dosenFields.forEach(field => field.style.display = 'block');
+            }
+        }
+
+        // Panggil saat halaman dimuat pertama kali
+        toggleFields();
+
+        // Event saat role berubah
+        roleSelect.addEventListener('change', toggleFields);
+    });
     </script>
 </body>
 </html>
