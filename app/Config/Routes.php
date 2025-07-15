@@ -5,14 +5,26 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'HomeController::index');
+$routes->get('/', 'Home::index');
+$routes->get('/home/dashboard', 'Home::dashboard');
 
+//register user
 $routes->get('register', 'AuthController::register');
 $routes->post('register/save', 'AuthController::saveRegister');
 
-$routes->get('login', 'AuthController::login');
-$routes->post('login', 'AuthController::attemptLogin');
+//register admin
+$routes->get('register/admin', 'AuthController::registerAdmin');
+$routes->post('register/admin/save', 'AuthController::saveRegisterAdmin');
 
+
+// AUTH ROUTES
+// AUTH ROUTES
+$routes->get('/login', 'AuthController::login');
+$routes->post('/login/check', 'AuthController::attemptLogin');
+
+$routes->get('/login/check-email', 'AuthController::checkEmail');
+
+$routes->get('/logout', 'AuthController::logout');
 $routes->get('logout', 'AuthController::logout');
 
 $routes->group('admin', function($routes) {
