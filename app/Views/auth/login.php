@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login System</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
         * {
             margin: 0;
             padding: 0;
@@ -359,217 +355,111 @@
 
         
     </style>
-</head>
 <body>
-   <div class="login-container">
+  <div class="login-container">
     <div class="login-card">
-        <a href="<?= base_url('home') ?>" class="back">
-            <img src="<?= base_url('images/back.png') ?>" alt="Back">
-        </a>
+      <a href="<?= base_url('home') ?>" class="back">
+        <img src="<?= base_url('images/back.png') ?>" alt="Back">
+      </a>
 
-        <!-- Logo Display -->
-        <div class="logo-display">
-            <img src="<?= base_url('images/logo-polban4.png') ?>" alt="POLBAN Logo" class="logo-img">
+      <div class="logo-display mb-3">
+        <img src="<?= base_url('images/logo-polban4.png') ?>" alt="POLBAN Logo" class="logo-img">
+      </div>
+
+      <div class="login-form active" id="loginForm">
+        <form action="<?= base_url('/login/check') ?>" method="post" autocomplete="off">
+          
+          <!-- Email Field -->
+          <div class="form-group mb-3">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" class="form-control with-icon" name="email" id="emailInput" placeholder="Masukkan Email Anda" required autocomplete="off">
+          </div>
+
+          <!-- NIM Field -->
+          <div class="form-group mb-3" id="nimField" style="display: none;">
+            <i class="fas fa-id-badge input-icon"></i>
+            <input type="text" class="form-control with-icon" name="nim" placeholder="Masukkan NIM Anda" autocomplete="off">
+          </div>
+
+          <!-- NIDK Field -->
+          <div class="form-group mb-3" id="nidkField" style="display: none;">
+            <i class="fas fa-id-badge input-icon"></i>
+            <input type="text" class="form-control with-icon" name="nidk" placeholder="Masukkan NIDK Anda" autocomplete="off">
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group mb-3">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" class="form-control with-icon" id="loginPassword" name="password" placeholder="Password" required autocomplete="new-password">
+          </div>
+
+          <!-- Show Password -->
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="showLoginPassword" onchange="togglePassword('loginPassword')">
+            <label class="form-check-label" for="showLoginPassword">Show Password</label>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="btn btn-primary w-100 mb-2">
+            <i class="fas fa-sign-in-alt me-2"></i> Login
+          </button>
+
+
+        <div class="auth-switch mt-3 text-center">
+          Belum punya akun? <a href="<?= base_url('/register') ?>">Register</a>
         </div>
+      </div>
 
+     
 
-
-            <!-- Login Form -->
-            <div class="login-form active" id="loginForm">
-                   <form action="<?= base_url('/login/check') ?>" method="post">
-                    <?php
-$role = session('login_role') ?? 'mahasiswa'; // Default ke mahasiswa jika tidak ada session
-$inputLabel = $role === 'dosen' ? 'Masukkan NIDN Anda' : 'Masukkan NIM Anda';
-$inputName = $role === 'dosen' ? 'nidn' : 'nim';
-$inputIcon = 'fa-id-badge';
-?>
-
-    <!-- NIM Field -->
-   <!-- NIM/NIDN Field -->
-<div class="form-group">
-    <i class="fas <?= $inputIcon ?> input-icon"></i>
-    <input type="text" class="form-control with-icon" name="<?= $inputName ?>" placeholder="<?= $inputLabel ?>" required>
-</div>
-
-    <!-- Email Field -->
-    <div class="form-group">
-        <i class="fas fa-envelope input-icon"></i>
-        <input type="email" class="form-control with-icon" name="email" placeholder="Masukkan Email Anda" required>
     </div>
+  </div>
 
-    <!-- Password Field -->
-    <div class="form-group">
-        <i class="fas fa-lock input-icon"></i>
-        <input type="password" class="form-control with-icon" id="loginPassword" name="password" placeholder="Password" required>
-    </div>
+  <script>
+    const emailInput = document.getElementById('emailInput');
+    const nimField = document.getElementById('nimField');
+    const nidkField = document.getElementById('nidkField');
 
-    <!-- Show Password -->
-    <div class="show-password">
-        <input type="checkbox" id="showLoginPassword" onchange="togglePassword('loginPassword')">
-        <label for="showLoginPassword">Show Password</label>
-    </div>
-
-    <!-- Login Button -->
-    <button type="submit" class="login-btn">
-        <i class="fas fa-sign-in-alt me-2"></i>
-        Login
-    </button>
-
-    <button type="submit" class="login-btn2">
-        <i class="fas fa-sign-in-alt me-2"></i>
-        Activate
-    </button>
-</form>
-
-                    
-
-                    <!-- Session Info -->
-                    
-
-                    
-
-                <!-- Register Link -->
-                <div class="auth-switch">
-                    Don't have an account? <a href="/register" onclick="showRegister()">Register</a>
-                </div>
-            </div>
-
-            <!-- Register Form -->
-            <div class="register-form" id="registerForm">
-                <form>
-                    <!-- Username Field -->
-                    <div class="form-group">
-                        <i class="fas fa-user input-icon"></i>
-                        <input type="text" class="form-control with-icon" placeholder="Choose username" required>
-                    </div>
-
-                    <!-- Email Field -->
-                    <div class="form-group">
-                        <i class="fas fa-envelope input-icon"></i>
-                        <input type="email" class="form-control with-icon" placeholder="Enter email" required>
-                    </div>
-
-                    <!-- Password Field -->
-                    <div class="form-group">
-                        <i class="fas fa-lock input-icon"></i>
-                        <input type="password" class="form-control with-icon" id="registerPassword" placeholder="Create password" required>
-                    </div>
-
-                    <!-- Confirm Password Field -->
-                    <div class="form-group">
-                        <i class="fas fa-lock input-icon"></i>
-                        <input type="password" class="form-control with-icon" id="confirmPassword" placeholder="Confirm password" required>
-                    </div>
-
-                    <!-- Show Password -->
-                    <div class="show-password">
-                        <input type="checkbox" id="showRegisterPassword" onchange="toggleRegisterPasswords()">
-                        <label for="showRegisterPassword">Show Password</label>
-                    </div>
-
-                    <!-- Register Button -->
-                    <button type="submit" class="login-btn">
-                        <i class="fas fa-user-plus me-2"></i>
-                        Sign Up
-                    </button>
-
-                    <!-- Session Info -->
-                    <div class="session-info">
-                        Session: Hyperf
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="action-buttons">
-                        <div class="action-btn" title="Restart">
-                            <i class="fas fa-redo"></i>
-                        </div>
-                        <div class="action-btn" title="Sleep">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                        <div class="action-btn" title="Shutdown">
-                            <i class="fas fa-power-off"></i>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- Login Link -->
-                <div class="auth-switch">
-                    Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Real-time clock
-        function updateTime() {
-            const now = new Date();
-            const timeElement = document.getElementById('current-time');
-            const dateElement = document.getElementById('current-date');
-            
-            const timeString = now.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true
-            });
-            timeElement.textContent = timeString;
-            
-            const dateString = now.toLocaleDateString('en-US', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long'
-            });
-            dateElement.textContent = dateString;
-        }
-
-        // Toggle password visibility for login
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            if (input.type === 'password') {
-                input.type = 'text';
-            } else {
-                input.type = 'password';
+    emailInput.addEventListener('blur', () => {
+      const email = emailInput.value.trim();
+      if (email.length > 5) {
+        fetch(`<?= base_url('/login/check-email') ?>?email=${encodeURIComponent(email)}`)
+          .then(res => res.json())
+          .then(data => {
+            nimField.style.display = 'none';
+            nidkField.style.display = 'none';
+            if (data.role === 'mahasiswa') {
+              nimField.style.display = 'block';
+            } else if (data.role === 'dosen') {
+              nidkField.style.display = 'block';
             }
-        }
+          })
+          .catch(err => console.error(err));
+      }
+    });
 
-        // Toggle password visibility for register
-        function toggleRegisterPasswords() {
-            const checkbox = document.getElementById('showRegisterPassword');
-            const password = document.getElementById('registerPassword');
-            const confirmPassword = document.getElementById('confirmPassword');
-            
-            if (checkbox.checked) {
-                password.type = 'text';
-                confirmPassword.type = 'text';
-            } else {
-                password.type = 'password';
-                confirmPassword.type = 'password';
-            }
-        }
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
 
-        // Show register form
-        function showRegister() {
-            document.getElementById('loginForm').classList.remove('active');
-            document.getElementById('registerForm').classList.add('active');
-        }
+    function toggleRegisterPasswords() {
+      const pass = document.getElementById('registerPassword');
+      const confirm = document.getElementById('confirmPassword');
+      const show = document.getElementById('showRegisterPassword').checked;
+      pass.type = show ? 'text' : 'password';
+      confirm.type = show ? 'text' : 'password';
+    }
 
-        // Show login form
-        function showLogin() {
-            document.getElementById('registerForm').classList.remove('active');
-            document.getElementById('loginForm').classList.add('active');
-        }
+    function showRegister() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+    }
 
-        // Initialize
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
+    function showLogin() {
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
