@@ -378,7 +378,7 @@
                 </div>
 
                 <div class="form-group dosen-only">
-                    <label for="nidk" class="form-label required">NIDK (Dosen)</label>
+                    <label for="nidk" class="form-label required">NIDN (Dosen)</label>
                     <input type="text" name="nidk" id="nidk" class="form-control" placeholder="NIDK Dosen">
                 </div>
 
