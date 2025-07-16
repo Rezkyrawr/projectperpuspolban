@@ -27,6 +27,17 @@ $routes->get('/login/check-email', 'AuthController::checkEmail');
 $routes->get('/logout', 'AuthController::logout');
 $routes->get('logout', 'AuthController::logout');
 
+// Tugas Akhir (TA)
+$routes->get('/articles', 'TaController::index');
+$routes->get('/articles/create', 'TaController::create');
+$routes->post('/articles/store', 'TaController::store');
+
+$routes->get('/articles/edit/(:num)', 'TaController::edit/$1');
+$routes->post('/articles/update/(:num)', 'TaController::update/$1');
+$routes->get('/articles/delete/(:num)', 'TaController::delete/$1');
+
+
+
 $routes->group('admin', function($routes) {
     // Jurusan
     
@@ -46,10 +57,10 @@ $routes->group('admin', function($routes) {
     $routes->post('prodi/update/(:num)', 'Admin\ProdiController::update/$1');
     $routes->get('prodi/delete/(:num)', 'Admin\ProdiController::delete/$1');
 
-   // crud kategory
-$routes->get('kategory', 'Kategory::index');
-$routes->post('kategory/save', 'Kategory::save');
-$routes->get('kategory/edit/(:num)', 'Kategory::edit/$1');
-$routes->post('kategory/update/(:num)', 'Kategory::update/$1');
-$routes->get('kategory/delete/(:num)', 'Kategory::delete/$1');
+    // Category
+$routes->get('kategory', 'Admin\KategoryController::index');
+$routes->post('kategory/save', 'Admin\KategoryController::save');
+$routes->get('kategory/edit/(:num)', 'Admin\KategoryController::edit/$1');
+$routes->post('kategory/update/(:num)', 'Admin\KategoryController::update/$1');
+$routes->get('kategory/delete/(:num)', 'Admin\KategoryController::delete/$1');
 });
