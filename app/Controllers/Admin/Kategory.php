@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-use App\Models\KategoryModel;
+use App\Models\Admin\KategoryModel;
 
 class Kategory extends BaseController
 {
