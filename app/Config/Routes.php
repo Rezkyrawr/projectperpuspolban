@@ -46,11 +46,10 @@ $routes->group('admin', function($routes) {
     $routes->post('prodi/update/(:num)', 'Admin\ProdiController::update/$1');
     $routes->get('prodi/delete/(:num)', 'Admin\ProdiController::delete/$1');
 
-    // Category
-    $routes->get('category', 'Admin\CategoryController::index');
-    $routes->get('category/create', 'Admin\CategoryController::create');
-    $routes->post('category/store', 'Admin\CategoryController::store');
-    $routes->get('category/edit/(:num)', 'Admin\CategoryController::edit/$1');
-    $routes->post('category/update/(:num)', 'Admin\CategoryController::update/$1');
-    $routes->get('category/delete/(:num)', 'Admin\CategoryController::delete/$1');
+   // crud kategory
+$routes->get('kategory', 'Kategory::index');
+$routes->post('kategory/save', 'Kategory::save');
+$routes->get('kategory/edit/(:num)', 'Kategory::edit/$1');
+$routes->post('kategory/update/(:num)', 'Kategory::update/$1');
+$routes->get('kategory/delete/(:num)', 'Kategory::delete/$1');
 });
