@@ -63,4 +63,23 @@ $routes->post('kategory/save', 'Admin\KategoryController::save');
 $routes->get('kategory/edit/(:num)', 'Admin\KategoryController::edit/$1');
 $routes->post('kategory/update/(:num)', 'Admin\KategoryController::update/$1');
 $routes->get('kategory/delete/(:num)', 'Admin\KategoryController::delete/$1');
+
+      // ADMIN - komentar
+    $routes->get('komen', 'Admin\KomenController::index');
+    $routes->get('komen/delete/(:num)', 'Admin\KomenController::delete/$1');
+    $routes->post('komen/delete/(:num)', 'Admin\KomenController::destroy/$1');
+
+     // ADMIN - kontak
+    $routes->get('kontak', 'Admin\KontakController::index');
+    $routes->get('kontak/balas/(:num)', 'Admin\KontakController::balas/$1');
+    $routes->post('kontak/update/(:num)', 'Admin\KontakController::update/$1');
+    
 });
+// USER - komentar
+$routes->get('user/komen/create', 'Admin\KomenController::create');
+$routes->post('user/komen/store', 'Admin\KomenController::store');
+
+// USER - kontak
+$routes->get('user/kontak/create', 'Admin\KontakController::create');
+$routes->post('user/kontak/store', 'Admin\KontakController::store');
+
